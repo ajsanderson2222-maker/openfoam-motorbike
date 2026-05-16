@@ -17,6 +17,9 @@ OMEGA=$(python3 -c "print(f'{1.78*(int($V)/20):.4f}')")
 
 echo "=== Running U=$V m/s  k=$K  omega=$OMEGA ==="
 
+# Update reference velocity in forceCoeffs
+sed -i "s/magUInf\s*[0-9.]*/magUInf         $V/" system/forceCoeffs
+
 # Update initial conditions (plain key-value, no OF header needed for include file)
 python3 - <<PYEOF
 content = f"""flowVelocity         ($V 0 0);

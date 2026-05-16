@@ -48,6 +48,8 @@ if len(sys.argv) > 1 and sys.argv[1] == "combined":
     axes[0].set_xlabel("U∞ [m/s]"); axes[0].set_ylabel("Cd")
     axes[0].set_title("Drag Coefficient"); axes[0].grid(True, alpha=0.3)
     axes[0].set_xlim(15, 45)
+    cd_mid = np.mean(cds)
+    axes[0].set_ylim(cd_mid - 0.05, cd_mid + 0.05)
 
     axes[1].plot(velocities, cls, "bs-", ms=8, lw=2)
     for v, cl in zip(velocities, cls):
@@ -56,6 +58,8 @@ if len(sys.argv) > 1 and sys.argv[1] == "combined":
     axes[1].set_xlabel("U∞ [m/s]"); axes[1].set_ylabel("Cl")
     axes[1].set_title("Lift Coefficient"); axes[1].grid(True, alpha=0.3)
     axes[1].set_xlim(15, 45)
+    cl_mid = np.mean(cls)
+    axes[1].set_ylim(cl_mid - 0.05, cl_mid + 0.05)
 
     plt.tight_layout()
     plt.savefig(f"{OUT}/coefficients_vs_velocity.png", dpi=150, bbox_inches="tight")
